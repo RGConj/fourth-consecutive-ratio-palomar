@@ -1,0 +1,7 @@
+{
+  "challenge_module": "ChallengeConditional",
+  "solution_module": "SolutionConditional",
+  "theorem_names": ["FourthRatio.fourth_consecutive_ratio_of_ppw"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": false
+}

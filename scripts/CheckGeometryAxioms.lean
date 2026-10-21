@@ -1,0 +1,65 @@
+module
+
+public meta import Lean.Elab.Command
+public meta import Lean.Util.CollectAxioms
+import RequestProject.Isoperimetric
+import RequestProject.ScalarCoarea
+import RequestProject.RearrangementMass
+import RequestProject.SmoothCoarea
+import RequestProject.VolterraComparison
+import RequestProject.MassFromRatio
+import RequestProject.ACVolterraComparison
+import RequestProject.QuantileProfile
+import RequestProject.QuantileMass
+
+/-! Fail-closed audit of geometric tools; this does not establish ChitiMass. -/
+
+meta section
+
+open Lean Elab Command
+
+elab "assert_standard_axioms " n:ident : command => do
+  let name ← liftCoreM <| realizeGlobalConstNoOverloadWithInfo n
+  let axioms ← Lean.collectAxioms name
+  let allowed : Array Name := #[``propext, ``Classical.choice, ``Quot.sound]
+  let rejected := axioms.filter fun a => !allowed.contains a
+  if !rejected.isEmpty then
+    throwError "{name}: disallowed axioms {rejected}; all axioms: {axioms}"
+  logInfo m!"{name}: PASS; axioms: {axioms}"
+
+assert_standard_axioms prekopa_leindler
+assert_standard_axioms brunn_minkowski_euclideanSpace
+assert_standard_axioms isoperimetric_inequality
+assert_standard_axioms ProbabilityTheory.LipschitzWith.scalarCoareaFormula
+assert_standard_axioms FourthRatio.setLIntegral_le_superlevel_min
+assert_standard_axioms FourthRatio.setLIntegral_eq_superlevel_min
+assert_standard_axioms FourthRatio.setLIntegral_le_of_equidistributed_nested
+
+assert_standard_axioms FourthRatio.gradient_norm_eq_fderiv_norm
+assert_standard_axioms FourthRatio.smooth_compact_coarea
+assert_standard_axioms FourthRatio.smooth_compact_coarea_energy_slab
+assert_standard_axioms FourthRatio.volterra_quotient_monotone
+assert_standard_axioms FourthRatio.cumulative_sq_le_of_ratio_monotone
+assert_standard_axioms FourthRatio.monotoneOn_of_locally_ac_deriv_nonneg
+assert_standard_axioms FourthRatio.right_limit_le_of_monotoneOn
+assert_standard_axioms FourthRatio.ac_volterra_quotient_monotone
+
+assert_standard_axioms FourthRatio.decreasingQuantile_antitone
+assert_standard_axioms FourthRatio.decreasingQuantile_measurable
+assert_standard_axioms FourthRatio.superlevel_measure_eq_iSup_rat
+assert_standard_axioms FourthRatio.decreasingQuantile_superlevel_iff
+assert_standard_axioms FourthRatio.volume_positive_ofReal_lt
+assert_standard_axioms FourthRatio.decreasingQuantile_superlevel_volume
+assert_standard_axioms FourthRatio.decreasingQuantile_le_integral_div
+assert_standard_axioms FourthRatio.decreasingQuantile_lt_top
+assert_standard_axioms FourthRatio.decreasingProfile_measurable
+assert_standard_axioms FourthRatio.decreasingProfile_antitoneOn
+assert_standard_axioms FourthRatio.decreasingProfile_superlevel_iff
+assert_standard_axioms FourthRatio.decreasingProfile_superlevel_measure
+assert_standard_axioms FourthRatio.decreasingProfile_lintegral_eq
+
+assert_standard_axioms FourthRatio.setLIntegral_le_superlevel_min_ae
+assert_standard_axioms FourthRatio.rearrangedDensity_superlevel
+assert_standard_axioms FourthRatio.setLIntegral_le_decreasingProfile
+
+end

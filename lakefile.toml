@@ -1,0 +1,23 @@
+name = "RequestProject"
+defaultTargets = ["RequestProject", "Challenge", "Solution", "ChallengeConditional", "SolutionConditional"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "625d8914199bc567cca9b91f90e8e5afafa5ae51"
+
+[[lean_lib]]
+name = "RequestProject"
+globs = ["RequestProject.+"]
+
+[[lean_lib]]
+name = "Challenge"
+
+[[lean_lib]]
+name = "Solution"
+
+[[lean_lib]]
+name = "ChallengeConditional"
+
+[[lean_lib]]
+name = "SolutionConditional"

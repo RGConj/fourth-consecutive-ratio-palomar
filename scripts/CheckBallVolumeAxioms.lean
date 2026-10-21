@@ -1,0 +1,61 @@
+module
+
+public meta import Lean.Elab.Command
+public meta import Lean.Util.CollectAxioms
+import RequestProject.BallVolumeKernel
+import RequestProject.BallVolumeEndpoint
+import RequestProject.BallVolumePositive
+import RequestProject.BallVolumeRegular
+import RequestProject.InitialMassAC
+import RequestProject.ChitiRatio
+import RequestProject.RadialVolumeMeasure
+
+/-! Actual ball-model audit. ChitiMass still requires completing the comparison. -/
+
+meta section
+
+open Lean Elab Command
+
+elab "assert_standard_axioms " n:ident : command => do
+  let name ← liftCoreM <| realizeGlobalConstNoOverloadWithInfo n
+  let axioms ← Lean.collectAxioms name
+  let allowed : Array Name := #[``propext, ``Classical.choice, ``Quot.sound]
+  let rejected := axioms.filter fun a => !allowed.contains a
+  if !rejected.isEmpty then
+    throwError "{name}: disallowed axioms {rejected}; all axioms: {axioms}"
+  logInfo m!"{name}: PASS; axioms: {axioms}"
+
+assert_standard_axioms FourthRatio.besselSeries_parameter_scale
+assert_standard_axioms FourthRatio.hasDerivAt_normalizedSeries
+assert_standard_axioms FourthRatio.ballVolumeSquareRadius_pos
+assert_standard_axioms FourthRatio.hasDerivAt_ballVolumeSquareRadius
+assert_standard_axioms FourthRatio.tendsto_ballVolumeSquareRadius_zero
+assert_standard_axioms FourthRatio.ballVolumeBessel_eq_besselEntire
+assert_standard_axioms FourthRatio.hasDerivAt_ballVolumeBessel
+assert_standard_axioms FourthRatio.hasDerivAt_ballVolumeBesselFlux
+assert_standard_axioms FourthRatio.tendsto_ballVolumeBesselFlux_zero
+assert_standard_axioms FourthRatio.ballVolumeKernel_eq_talenti
+assert_standard_axioms FourthRatio.tendsto_ballVolumeBessel_zero
+assert_standard_axioms FourthRatio.tendsto_ballVolumeBesselFlux_div_zero
+assert_standard_axioms FourthRatio.decreasingProfile_ball_wronskian_zero
+assert_standard_axioms FourthRatio.ballVolumeSquareRadius_lt_radius_sq
+assert_standard_axioms FourthRatio.ballVolumeBessel_pos
+assert_standard_axioms FourthRatio.ballVolumeBesselFlux_nonneg
+
+assert_standard_axioms FourthRatio.contDiffAt_ballVolumeSquareRadius
+assert_standard_axioms FourthRatio.contDiffAt_ballVolumeBessel
+assert_standard_axioms FourthRatio.contDiffAt_ballVolumeBesselFlux
+assert_standard_axioms FourthRatio.ballVolumeBessel_absolutelyContinuous
+assert_standard_axioms FourthRatio.ballVolumeBesselFlux_absolutelyContinuous
+assert_standard_axioms FourthRatio.ballVolumeBessel_inv_absolutelyContinuous
+assert_standard_axioms FourthRatio.initialMass_absolutelyContinuous
+
+assert_standard_axioms FourthRatio.eigen_profile_ball_ratio_monotone
+assert_standard_axioms FourthRatio.radialUnitVolume_pos
+assert_standard_axioms FourthRatio.continuous_radialVolume
+assert_standard_axioms FourthRatio.radialVolume_nonneg
+assert_standard_axioms FourthRatio.map_radialVolume_Iic
+assert_standard_axioms FourthRatio.map_radialVolume
+assert_standard_axioms FourthRatio.radialVolume_measurePreserving
+
+end

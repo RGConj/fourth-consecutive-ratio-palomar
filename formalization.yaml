@@ -1,0 +1,86 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+project:
+  name: "The fourth consecutive Dirichlet eigenvalue ratio"
+  description: >-
+    An unconditional Lean proof of the strict inequality lambda_5 / lambda_4 <
+    C_N for every nonempty bounded connected open subset of Euclidean space of
+    dimension at least two, with variational Dirichlet eigenvalues and the sharp
+    Bessel-zero constant. No boundary regularity is assumed.
+  authors: ["Jiachen Shi", "Quanyu Tang"]
+  license: "Apache-2.0"
+  responsible_maintainers: ["Jiachen Shi", "Quanyu Tang"]
+classification:
+  arxiv: ["math.SP", "math.AP"]
+  msc2020: ["35P15", "35J05", "68V20"]
+sources:
+  - title: "A sharp bound for the fourth consecutive Dirichlet eigenvalue ratio"
+    authors: ["Jiachen Shi", "Quanyu Tang"]
+    type: "unpublished manuscript"
+    location: "Author-supplied manuscript, main theorem (label thm:main)."
+    relationship: "formalizes"
+    note: >-
+      The mathematical authors developed the original informal proof with
+      ChatGPT assistance. Manuscript TeX is excluded from the release source.
+  - title: "A Second Proof of the Payne–Pólya–Weinberger Conjecture"
+    authors: ["Mark S. Ashbaugh", "Rafael D. Benguria"]
+    type: "article"
+    id: "https://doi.org/10.1007/BF02099533"
+    relationship: "background"
+    note: "Background for the Bessel monotonicity arguments."
+  - title: "A reverse Hölder inequality for the eigenfunctions of linear second order elliptic operators"
+    authors: ["Giuseppe Chiti"]
+    type: "article"
+    id: "https://doi.org/10.1007/BF00948319"
+    relationship: "background"
+    note: "Background for the rearrangement and mass-comparison argument."
+status:
+  scope: >-
+    The main Challenge/Solution pair proves the unconditional strict fourth-ratio
+    inequality. RatioStatement supplies the exact quotient form using the proved
+    positivity of lambda_4. Both Bessel monotonicities and Chiti mass concentration
+    are proved for the actual mathematical objects. Conditional reductions remain
+    separate library results. Deliberate Challenge placeholders are excluded from
+    the production proof count.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+automation:
+  methods:
+    - method: "copilot"
+      models: ["ChatGPT (model not recorded)"]
+      framework: "ChatGPT"
+      tool_setup: "Assistance to the human authors in developing the informal proof."
+    - method: "agent"
+      models: ["Aristotle (internal model not recorded)", "Codex (GPT-6)"]
+      framework: "Lean 4 and Mathlib"
+      tool_setup: >-
+        Aristotle generated the initial Lean development from the authors' informal
+        proof. Codex audited the actual statement and definitions, migrated the
+        toolchain, filled both Bessel and Chiti proof gaps using genuine analytic
+        constructions, and added fail-closed verification and release tooling.
+  spend_usd: "not tracked"
+  notes: "Human mathematical authorship is distinct from AI proof assistance and formalization."
+fidelity:
+  divergences: >-
+    The final Lean inequality is multiplicative rather than a quotient;
+    positivity of lambda_4 gives the equivalence, made explicit in RatioStatement.
+    Conditional variants expose additional hypotheses for modular reductions;
+    the unconditional theorem supplies their proved instances in its proof.
+review:
+  status: "agent-reviewed"
+  reviewers: []
+  notes: >-
+    Codex audited domain, Sobolev graph-closure, min-max, Bessel-series and zero
+    definitions and the complete main proof chain. A separate AI reviewer inspected
+    source fidelity, hypothesis consumption and the new Bessel/Chiti proof chain.
+    No independent human peer review or Palomar approval is claimed.
+alignment:
+  namespace: "FourthRatio"
+  statements:
+    - source: "Main theorem, manuscript label thm:main"
+      lean: "FourthRatio.fourth_consecutive_ratio"
+      module: "Solution.lean"
+      status: "completed"
+      note: "The exact quotient form is proved in FourthRatio.fourth_consecutive_ratio_div."
+acknowledgements: "Lean 4, Mathlib, ChatGPT, Aristotle, Codex, Jonathan Ho, and Asher Yan; see THIRD_PARTY.md for reused formal proofs."

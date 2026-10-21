@@ -1,0 +1,97 @@
+module
+
+public meta import Lean.Elab.Command
+public meta import Lean.Util.CollectAxioms
+import Solution
+import SolutionConditional
+import RequestProject.RatioStatement
+import RequestProject.WronskianMonotone
+import RequestProject.BesselAB
+import RequestProject.ChitiCrossing
+import RequestProject.BesselNormalizedGap
+import RequestProject.BesselRatioConvex
+import RequestProject.RadialEnergy
+import RequestProject.WronskianSign
+import RequestProject.BesselABFactor
+import RequestProject.AnalyticSlope
+import RequestProject.BesselABEnergy
+import RequestProject.BesselABComplete
+
+/-!
+# Fail-closed audit of the advertised theorem dependencies
+
+Unlike `#print axioms`, this command makes Lean exit with an error when a
+declaration uses an axiom outside the standard three. A successful ordinary
+`lake build` alone is insufficient: Lean permits proofs containing `sorry`.
+
+Run after building the project: `lake env lean scripts/CheckAxioms.lean`.
+It rejects any nonstandard axiom in the advertised unconditional conclusions.
+-/
+
+meta section
+
+open Lean Elab Command
+
+elab "assert_standard_axioms " n:ident : command => do
+  let name ← liftCoreM <| realizeGlobalConstNoOverloadWithInfo n
+  let axioms ← Lean.collectAxioms name
+  let allowed : Array Name := #[``propext, ``Classical.choice, ``Quot.sound]
+  let rejected := axioms.filter fun a => !allowed.contains a
+  if !rejected.isEmpty then
+    throwError "{name}: disallowed axioms {rejected}; all axioms: {axioms}"
+  logInfo m!"{name}: PASS; axioms: {axioms}"
+
+assert_standard_axioms FourthRatio.nonneg_of_quadratic_derivative
+assert_standard_axioms FourthRatio.radial_ratio_monotone
+assert_standard_axioms FourthRatio.ab_bessel_monotone
+assert_standard_axioms FourthRatio.integral_le_of_single_crossing
+assert_standard_axioms FourthRatio.besselSeries1_succ
+assert_standard_axioms FourthRatio.besselF1_succ
+assert_standard_axioms FourthRatio.besselF_succ_rel
+assert_standard_axioms FourthRatio.bessel_rayleigh_lower
+assert_standard_axioms FourthRatio.besselZero_normalized_gap
+assert_standard_axioms FourthRatio.radial_logderiv_strict_convex
+assert_standard_axioms FourthRatio.besselOrderRatio_eq
+assert_standard_axioms FourthRatio.besselOrderRatio_derivatives_pos
+assert_standard_axioms FourthRatio.besselOrderRatio_zero
+assert_standard_axioms FourthRatio.besselOrderRatio_strictConvexOn
+assert_standard_axioms FourthRatio.besselOrderRatio_div_strictMonoOn
+assert_standard_axioms FourthRatio.radial_energy_antitone
+assert_standard_axioms FourthRatio.nonpos_of_increasing_coefficient
+assert_standard_axioms FourthRatio.radial_quotient_antitone
+assert_standard_axioms FourthRatio.ab_bessel_factor_antitone
+assert_standard_axioms FourthRatio.hasDerivAt_dslope_center
+assert_standard_axioms FourthRatio.regular_quotient_deriv_one
+assert_standard_axioms FourthRatio.regular_quotient_log_slope_one
+assert_standard_axioms FourthRatio.abRegularFactor_analytic
+assert_standard_axioms FourthRatio.abLogSlope_continuous
+assert_standard_axioms FourthRatio.abLogSlope_zero
+assert_standard_axioms FourthRatio.abLogSlope_one
+assert_standard_axioms FourthRatio.log_slope_bounds_of_monotone_factor
+assert_standard_axioms FourthRatio.abLogSlope_mem_Icc
+assert_standard_axioms FourthRatio.quotient_log_slope_deriv
+assert_standard_axioms FourthRatio.exists_downcrossing
+assert_standard_axioms FourthRatio.nonpos_deriv_of_convex_ode
+assert_standard_axioms FourthRatio.hasDerivAt_abLogSlope
+assert_standard_axioms FourthRatio.abRiccati_convex
+assert_standard_axioms FourthRatio.abLogSlope_deriv_nonpos
+assert_standard_axioms FourthRatio.ab_bessel_energy_antitone
+assert_standard_axioms FourthRatio.fourth_ratio_of_ppw
+assert_standard_axioms FourthRatio.fourth_consecutive_ratio_of_ppw
+assert_standard_axioms FourthRatio.ppw_of_deep_inputs
+assert_standard_axioms FourthRatio.fourth_ratio_of_deep_inputs
+assert_standard_axioms FourthRatio.ab_bessel
+assert_standard_axioms FourthRatio.chiti_mass
+assert_standard_axioms FourthRatio.fourth_ratio
+assert_standard_axioms FourthRatio.fourth_consecutive_ratio
+assert_standard_axioms FourthRatio.fourth_consecutive_ratio_div
+assert_standard_axioms FourthRatio.fourth_consecutive_ratio_div_of_ppw
+assert_standard_axioms FourthRatio.higher_ratio_uncond
+assert_standard_axioms FourthRatio.cor_upper_uncond
+assert_standard_axioms FourthRatio.cor_equality_uncond
+assert_standard_axioms FourthRatio.cor_sharpness_uncond
+assert_standard_axioms FourthRatio.eigenvalue_pos
+assert_standard_axioms FourthRatio.besselZero_props
+assert_standard_axioms FourthRatio.ground_state
+
+end
