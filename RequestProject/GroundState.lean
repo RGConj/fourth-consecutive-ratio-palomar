@@ -5,7 +5,7 @@ public import RequestProject.MaxPrinciple
 /-!
 # Simplicity of the first eigenvalue
 
-The simplicity part of the "connected sets" clause of the external spectral package is derived
+The simplicity part of the connected-domain spectral statement is derived
 here from the existence of a strictly positive first eigenfunction (`ground_state_pos`, proved in
 `RequestProject/MaxPrinciple.lean`),
 interior analyticity, Lemma 3.1 and unique continuation:
@@ -82,8 +82,8 @@ lemma first_eigen_orth_eq_zero {D : Set (RN N)} (hD : IsDomain D)
   exact first_eigen_no_sign_change hD hw hw' hf hP hM
 
 /-- **Spectral package, connected sets.** On a domain the first eigenvalue is simple and has a
-strictly positive (continuous) eigenfunction.  The positivity part is the external input
-`ground_state_pos` (`RequestProject/MaxPrinciple.lean`); simplicity is derived from it. -/
+strictly positive (continuous) eigenfunction.  Positivity is proved as `ground_state_pos` in
+`RequestProject/MaxPrinciple.lean`; simplicity is derived from it here. -/
 theorem ground_state (hN : 2 ≤ N) {D : Set (RN N)} (hD : IsDomain D) :
     (∀ u v, IsEigenfunction D u (eigenvalue D 1) → IsEigenfunction D v (eigenvalue D 1) →
       ∃ c : ℝ, v = c • u) ∧

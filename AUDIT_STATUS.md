@@ -7,9 +7,12 @@ an independent human review or a Palomar acceptance certificate.
 
 The source main theorem (`thm:main`) asserts
 $\lambda_5(\Omega)/\lambda_4(\Omega)\lt C_N$ for every bounded domain in
-Euclidean dimension at least two. Solution states the equivalent multiplication
-inequality. `FourthRatio.fourth_consecutive_ratio_div` derives the exact quotient
-using the proved positivity of the fourth variational Dirichlet eigenvalue.
+Euclidean dimension at least two. Solution publicly exposes the multiplication
+inequality and `FourthRatio.fourth_consecutive_ratio_div`, which derives the exact
+quotient using the proved positivity of the fourth variational Dirichlet eigenvalue.
+The main Comparator now checks both statements. Connectedness is part of the
+standard domain convention and is essential: four disjoint congruent balls attain
+equality, so the strict statement is not asserted for arbitrary bounded open sets.
 
 Expanded inputs of the unconditional theorem:
 
@@ -69,6 +72,9 @@ problem. This is AI source review, not human peer review.
 
 - Source gate: passes with no production proof hole or prohibited proof mechanism.
   Only the designated Challenge task placeholders are exempted.
+- Statement source gate: `scripts/check_statement.py` compares the copied basic
+  definitions and advertised theorem interfaces. This detects source drift;
+  it does not replace Lean elaboration or the Comparator's semantic comparison.
 - Pinned metadata: passes the official v0.4 schema, full dependency SHA checks,
   toolchain consistency and Comparator configuration checks.
 - Bessel, geometry, Sobolev, quantile, Talenti, ball-model and Chiti auxiliary
@@ -91,6 +97,37 @@ Linux sandboxed official Comparator with bundled NanoDa and con-ron. The
 independent replay uses `bubblewrap` and the pinned toolchain binaries.
 The execution evidence above refers to the source commit; later documentation
 updates do not alter its mathematical source.
+
+## Final source review on 2026-10-21
+
+The follow-up review started from `78454cd2b725e6f50198a53703d51bbc6f932edd`.
+The GitHub API and downloaded logs confirmed the full build and all 227 axiom
+checks on that exact revision, and confirmed con-ron, NanoDa and Lean kernel
+acceptance of the multiplication theorem's dependency closure:
+[build](https://github.com/RGConj/fourth-consecutive-ratio-palomar/actions/runs/39575147624),
+[Comparator](https://github.com/RGConj/fourth-consecutive-ratio-palomar/actions/runs/39575147926).
+
+Parallel AI source reviews checked the actual definitions and spectral min–max
+construction, the main strictness and line-field argument, and the Bessel,
+Chiti and PPW interfaces and key proofs. No substantive mathematical defect,
+hidden main-theorem assumption or change of the target statement was found
+within those reviews. This is a targeted source review supported by kernel
+checks, not a claim of independent human review of every line.
+
+The follow-up changes correct stale comments describing proved results as
+external assumptions and clarify that the product maximum norm is equivalent
+to the usual Sobolev norm. They also expose the exact quotient through
+`import Solution`, include it in the main Challenge/Comparator pair, add the
+statement source gate, and restrict CI caches to pinned dependencies so that
+project modules are compiled from source on every workflow run. The existing
+mathematical definitions and proof bodies are unchanged. Challenge contains
+two deliberate task placeholders; ChallengeConditional contains one. Neither
+is imported by a solution.
+
+Historical CI passes above apply only to their named revisions. For these
+follow-up changes, use both workflow results attached to the final revision.
+Build logs may contain non-fatal style and unused-tactic linter messages;
+passing compilation and axiom gates does not mean the source is warning-free.
 
 ## Release boundary
 

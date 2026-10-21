@@ -34,14 +34,13 @@ jobs:
           df -h .
           test "$(df -Pk . | awk 'NR==2 {print $4}')" -ge 20971520
       - name: Check source integrity
-        run: python3 scripts/check_sources.py
+        run: |
+          python3 scripts/check_sources.py
+          python3 scripts/check_statement.py
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
-          path: .lake
-          key: lean-build-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.sha }}
-          restore-keys: |
-            lean-build-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-
-            lean-comparator-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-
+          path: .lake/packages
+          key: lean-deps-v2-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}
       - uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9
         with:
           build: false

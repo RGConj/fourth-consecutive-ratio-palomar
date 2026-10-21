@@ -6,8 +6,8 @@ public import RequestProject.DisjointUnion
 /-!
 # Nodal localization
 
-The nodal localization theorem of Section 2 (`nodal`) is derived here from the remaining
-external inputs instead of being assumed:
+The nodal localization theorem of Section 2 (`nodal`) is derived here from the spectral,
+interior analyticity, ground-state and Sobolev results proved in the project:
 
 * restriction to a piece of a disjoint union of open sets maps `H(⋃ Dᵢ)` into `H(Dᵢ)`
   (`restrictTo_mem_H_piece`), a consequence of `H(⋃ Dᵢ) = closure (⨆ H(Dᵢ))` and the continuity
@@ -371,7 +371,7 @@ theorem eigenfunction_smooth_rep {D : Set (RN N)} (hD : IsAdmissible D)
 /-- **Nodal localization (full statement).** An eigenfunction is smooth in `D`; its sign
 truncations lie in the form domains of the sign sets, and the restrictions to the connected
 components of the sign sets are (up to sign) positive first eigenfunctions with the same
-eigenvalue.  (Derived from the external spectral package, the positive ground state, interior
+eigenvalue.  (Derived from the proved spectral package, the positive ground state, interior
 analyticity, Lemma 3.1 and the disjoint-union form domain.) -/
 theorem nodal (hN : 2 ≤ N) {D : Set (RN N)} (hD : IsAdmissible D) {u : Amb N} {lam : ℝ}
     (hu : IsEigenfunction D u lam) :

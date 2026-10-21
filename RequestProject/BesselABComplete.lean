@@ -5,8 +5,8 @@ public import RequestProject.BesselABEnergy
 
 /-! # Both Ashbaugh--Benguria Bessel monotonicity lemmas
 
-The definitions and statements of abW, ABBesselLemmas and ab_bessel are
-preserved from PPWDeep; the proof is now independent of the Chiti declaration.
+This module defines `abW` and `ABBesselLemmas` and proves both monotonicity statements as
+`ab_bessel`, using the Bessel quotient and energy estimates.
 -/
 
 @[expose] public section
@@ -40,7 +40,7 @@ nonincreasing on `(0, 1)`.
 (These are the two monotonicity lemmas of Ashbaugh–Benguria, Ann. of Math. 135 (1992), for the
 function `J_{ν+1}(j_{ν+1,1} t)/J_ν(j_{ν,1} t)`, with `2ν + 1 = N - 1` for `ν = N/2 - 1`; the
 statement is invariant under multiplication of `w` by a positive constant.)
-The first component is now proved as `ab_bessel_monotone` in `BesselAB.lean`.
+The first component is proved as `ab_bessel_monotone` in `BesselAB.lean`.
 The energy-weight component is proved in `BesselABEnergy.lean`, using a regular endpoint
 extension of the Bessel quotient, its Riccati equation and the convex level-crossing argument.
 

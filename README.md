@@ -13,7 +13,9 @@ $$\frac{\lambda_5(\Omega)}{\lambda_4(\Omega)}\lt C_N,
 \qquad C_N=\frac{j_{N/2,1}^2}{j_{N/2-1,1}^2}.$$
 
 There is no boundary regularity assumption. Eigenvalues are counted with
-multiplicity. This is the $m=4$ case of the consecutive-ratio conjecture.
+multiplicity. Here "domain" includes connectedness: the strict conclusion does
+not extend to arbitrary bounded open sets (four disjoint congruent balls attain
+equality). This is the $m=4$ case of the consecutive-ratio conjecture.
 Here $j_{\nu,1}$ denotes the first positive zero of the Bessel function $J_\nu$.
 
 ## Formal statement and definitions
@@ -26,10 +28,18 @@ theorem fourth_consecutive_ratio (N : ℕ) (hN : 2 ≤ N)
     eigenvalue Ω 5 < CN N * eigenvalue Ω 4
 ```
 
-[RatioStatement.lean](RequestProject/RatioStatement.lean) proves the exact quotient
-form `FourthRatio.fourth_consecutive_ratio_div` using positivity of the fourth
-eigenvalue. The theorem has no PPW, Chiti, smooth-boundary or abstract spectral
-hypothesis.
+[Solution.lean](Solution.lean) also publicly exposes the exact source statement,
+proved in [RatioStatement.lean](RequestProject/RatioStatement.lean):
+
+```lean
+theorem fourth_consecutive_ratio_div (N : ℕ) (hN : 2 ≤ N)
+    (Ω : Set (RN N)) (hΩ : IsDomain Ω) :
+    eigenvalue Ω 5 / eigenvalue Ω 4 < CN N
+```
+
+Its proof uses positivity of the fourth eigenvalue. Both forms have no PPW,
+Chiti, smooth-boundary or abstract spectral hypothesis. The main Comparator
+configuration checks both forms against the independently stated Challenge.
 
 [Defs.lean](RequestProject/Defs.lean) constructs the actual objects: Euclidean
 space with Lebesgue measure, the closure of the smooth compact-support gradient
@@ -51,8 +61,9 @@ The two proof gaps in the initial Aristotle delivery have been filled:
 
 The production proof contains no `sorry` or custom axiom. The strict axiom gate
 rejects every dependency outside `propext`, `Classical.choice` and `Quot.sound`.
-The deliberate `sorry` in each `Challenge*.lean` is a Comparator task placeholder;
-solutions do not import those challenge modules. Conditional reductions are
+The deliberate `sorry` terms in `Challenge*.lean` are Comparator task placeholders
+(two in `Challenge.lean`, one in `ChallengeConditional.lean`); solutions do not
+import those challenge modules. Conditional reductions are
 retained as separate library results, alongside the unconditional proof.
 See [AUDIT_STATUS.md](AUDIT_STATUS.md) for verification evidence and its limits.
 
@@ -68,6 +79,7 @@ python3 -m pip install -r scripts/requirements.txt
 lake exe cache get
 lake build
 python3 scripts/check_sources.py
+python3 scripts/check_statement.py
 python3 scripts/check_metadata.py
 lake env lean scripts/CheckAxioms.lean
 ```
@@ -82,7 +94,11 @@ bash scripts/verify-comparator.sh
 The script uses the Comparator and kernel binaries bundled with the pinned Lean
 toolchain. It generates a temporary independent-kernel configuration; the submitted
 `comparator.json` contains only allowed fields. The build and Comparator workflows
-run on pushes, pull requests and manual dispatch. For all auxiliary axiom gates
+run on pushes, pull requests and manual dispatch. They cache only pinned
+dependencies and rebuild this project's Lean modules from source on every run.
+The Python statement gate detects source drift in the copied definitions and
+public theorem interfaces; Lean and the Comparator perform the semantic checks.
+For all auxiliary axiom gates
 and logged reproduction, run `bash scripts/reproduce.sh` after installing the
 same prerequisites. A successful build alone is insufficient to rule out proof holes.
 

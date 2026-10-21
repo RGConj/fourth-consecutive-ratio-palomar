@@ -77,7 +77,7 @@ theorem lemma_parts {D : Set (RN N)} (hD : IsAdmissible D) {v : Amb N}
 /-! ### Lemma 3.2: spectral index of a shifted form -/
 
 /-- A complete orthonormal sequence of eigenfunctions (`e j` has eigenvalue `λ_{j+1}(D)`) with
-the spectral expansions, as provided by the external spectral package. -/
+the spectral expansions, as provided by the proved theorem `ext_spectral`. -/
 def IsSpectralBasis (D : Set (RN N)) (e : ℕ → Amb N) : Prop :=
   (∀ j, IsEigenfunction D (e j) (eigenvalue D (j + 1))) ∧
   (∀ i j, l2 (e i) (e j) = if i = j then 1 else 0) ∧

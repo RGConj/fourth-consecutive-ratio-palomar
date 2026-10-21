@@ -5,7 +5,7 @@ public import RequestProject.Closability
 /-!
 # Basic facts about the model of `H₀¹(D)`
 
-Elementary consequences of the definitions (and of the external spectral package) used
+Elementary consequences of the definitions and closability used
 throughout: monotonicity of `H_D` in `D`, vanishing of elements of `H_D` outside `D`,
 orthogonality of form domains of disjoint sets, algebraic identities for `q` and `⟨·,·⟩`.
 -/

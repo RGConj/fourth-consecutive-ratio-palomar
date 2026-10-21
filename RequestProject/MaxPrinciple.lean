@@ -7,7 +7,7 @@ public import RequestProject.TestFunctions
 /-!
 # Positivity of the ground state
 
-The positivity part of the "connected sets" clause of the external spectral package is derived
+The positivity part of the connected-domain spectral statement is derived
 here from the spectral theorem (`ext_spectral`), interior analyticity (`ext_analytic`), Lemma 3.1
 and unique continuation:
 

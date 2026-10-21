@@ -13,7 +13,7 @@ noncomputable section
 
 namespace FourthRatio
 
-/-- The unextended Bessel quotient, agreeing with `abW` in PPWDeep. -/
+/-- The unextended Bessel quotient, identified with `abW` in `BesselABComplete.lean`. -/
 def abRawProfile (ν t : ℝ) : ℝ := t * abDenom (ν + 1) t / abDenom ν t
 
 lemma abRawProfile_eq {ν : ℝ} (hν : 0 ≤ ν) {t : ℝ} (ht : t ≠ 1) :

@@ -6,9 +6,8 @@ public import RequestProject.InteriorAnalytic
 /-!
 # Parts of the external theorems that follow from the others
 
-Several statements of Section 2 that were originally transcribed as separate external theorems are
-in fact consequences of the remaining external inputs and of the definitions; they are proved
-here.
+Several statements of Section 2 follow from the definitions and the spectral and interior
+analyticity results proved in the project; they are derived here.
 
 * `eigenvalue_domain_mono` — domain monotonicity `D₁ ⊆ D₂ ⇒ λ_j(D₂) ≤ λ_j(D₁)` (part of the
   spectral package): it follows from the min–max definition, `H_{D₁} ≤ H_{D₂}`, and the existence

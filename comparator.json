@@ -1,6 +1,6 @@
 {
   "challenge_module": "Challenge",
   "solution_module": "Solution",
-  "theorem_names": ["FourthRatio.fourth_consecutive_ratio"],
+  "theorem_names": ["FourthRatio.fourth_consecutive_ratio", "FourthRatio.fourth_consecutive_ratio_div"],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
 }

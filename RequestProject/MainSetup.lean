@@ -35,9 +35,9 @@ structure Setup (N : ℕ) where
   hf : ∀ i, IsContRep Ω (e i) (f i)
   hf0 : ∀ x ∈ Ω, 0 < f 0 x
   hgap : CN N * eigenvalue Ω 4 ≤ eigenvalue Ω 5
-  /-- The PPW inequality (assumed hypothesis, see `PPWInequality`). -/
+  /-- The PPW inequality as an explicit parameter of the modular setup. -/
   ppw : PPWInequality N
-  /-- The PPW equality case (assumed hypothesis, see `PPWEqualityCase`). -/
+  /-- The PPW equality case as an explicit parameter of the modular setup. -/
   ppwEq : PPWEqualityCase N
 
 /-- The coordinate vector of `e = e₁` in `ℝ⁴`. -/

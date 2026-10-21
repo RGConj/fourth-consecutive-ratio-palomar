@@ -13,8 +13,9 @@ predicates `PPWInequality N` and `PPWEqualityCase N`.
 ## How the objects of the paper are modelled (all definitions below use only Mathlib)
 
 * `RN N = EuclideanSpace ℝ (Fin N)` is `ℝ^N` with Lebesgue measure `volume`.
-* `H D` is `H₀¹(D)`: the closure, in `L²(ℝ^N) × L²(ℝ^N; ℝ^N)` (i.e. in the `H¹` norm), of the
-  graph `{(φ, ∇φ) : φ ∈ C_c^∞(ℝ^N), tsupport φ ⊆ D}`; elements are zero-extended to `ℝ^N`.
+* `H D` is `H₀¹(D)`: the closure, in `L²(ℝ^N) × L²(ℝ^N; ℝ^N)`, of the graph
+  `{(φ, ∇φ) : φ ∈ C_c^∞(ℝ^N), tsupport φ ⊆ D}`; elements are zero-extended to `ℝ^N`.
+  The product maximum norm is equivalent to the usual `H¹` norm, giving the same closure.
 * `qf v w = ∫ ∇v·∇w`, `l2 v w = ∫ v w`, `rayleigh v = qf v v / l2 v v`.
 * `eigenvalue D j = inf_{V ≤ H D, dim V = j} sup_{0 ≠ v ∈ V} rayleigh v` (min–max), exactly
   Definition 1 of the paper.

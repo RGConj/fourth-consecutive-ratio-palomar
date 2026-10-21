@@ -63,8 +63,9 @@ automation:
   notes: "Human mathematical authorship is distinct from AI proof assistance and formalization."
 fidelity:
   divergences: >-
-    The final Lean inequality is multiplicative rather than a quotient;
-    positivity of lambda_4 gives the equivalence, made explicit in RatioStatement.
+    Solution publicly exposes both the multiplicative inequality and the exact
+    source quotient statement. Positivity of lambda_4 gives their equivalence,
+    made explicit in RatioStatement. The main Comparator checks both statements.
     Conditional variants expose additional hypotheses for modular reductions;
     the unconditional theorem supplies their proved instances in its proof.
 review:
@@ -83,4 +84,9 @@ alignment:
       module: "Solution.lean"
       status: "completed"
       note: "The exact quotient form is proved in FourthRatio.fourth_consecutive_ratio_div."
+    - source: "Main theorem, manuscript label thm:main (exact quotient form)"
+      lean: "FourthRatio.fourth_consecutive_ratio_div"
+      module: "RequestProject/RatioStatement.lean"
+      status: "completed"
+      note: "Publicly exposed by Solution.lean and included in the main Comparator configuration."
 acknowledgements: "Lean 4, Mathlib, ChatGPT, Aristotle, Codex, Jonathan Ho, and Asher Yan; see THIRD_PARTY.md for reused formal proofs."

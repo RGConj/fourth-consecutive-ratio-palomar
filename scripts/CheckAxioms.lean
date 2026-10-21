@@ -4,7 +4,6 @@ public meta import Lean.Elab.Command
 public meta import Lean.Util.CollectAxioms
 import Solution
 import SolutionConditional
-import RequestProject.RatioStatement
 import RequestProject.WronskianMonotone
 import RequestProject.BesselAB
 import RequestProject.ChitiCrossing

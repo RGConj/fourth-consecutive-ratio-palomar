@@ -10,6 +10,7 @@ run() {
   "$@" 2>&1 | tee "$OUT/$name.log"
 }
 run sources python3 scripts/check_sources.py
+run statement python3 scripts/check_statement.py
 run cache lake exe cache get
 run build lake build
 run metadata python3 scripts/check_metadata.py

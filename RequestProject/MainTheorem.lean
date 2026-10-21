@@ -33,9 +33,10 @@ theorem prop_degree_contradiction (S : Setup N) : False := by
 
 end Setup
 
-/-- **Theorem 5.0 (Fourth consecutive ratio), conditional form.** Assuming the PPW inequality and
-its equality case (External theorem 2.3 of the paper, not proved in this project), for every
-bounded domain `Ω ⊂ ℝ^N`, `λ₅(Ω) < C_N λ₄(Ω)`.  This theorem is free of `sorry`. -/
+/-- **Theorem 5.0 (Fourth consecutive ratio), conditional form.** With the PPW inequality and
+its equality case (External theorem 2.3 of the paper) as explicit hypotheses, every bounded
+domain `Ω ⊂ ℝ^N` satisfies `λ₅(Ω) < C_N λ₄(Ω)`.  `Unconditional.lean` supplies the proved PPW
+instances exposed in `PPWGap.lean`. -/
 theorem fourth_ratio_of_ppw (hppw : PPWInequality N) (hppwEq : PPWEqualityCase N) (hN : 2 ≤ N)
     {Ω : Set (RN N)} (hΩ : IsDomain Ω) :
     eigenvalue Ω 5 < CN N * eigenvalue Ω 4 := by

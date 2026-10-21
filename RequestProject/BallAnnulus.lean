@@ -79,8 +79,8 @@ the zero extension of `u|_G` agrees a.e. with a nonzero multiple of the first ei
 `Φ(· - y) 1_{B_R(y)}` of the ball `B_R(y)`, `R = j_{N/2-1,1}/√a`.  Then
 `λ_{2N+2}(Ω) < C_N a`.
 
-(The smoothness of `u` assumed in the paper is not needed: analyticity comes from the external
-regularity theorem.)
+(The smoothness of `u` assumed in the paper is not needed: analyticity follows from
+`ext_analytic`, proved in `RequestProject/InteriorAnalytic.lean`.)
 
 Proof: by unique continuation for analytic functions `u = c Φ(· - y)` on `Ω`; the Sobolev
 multiplier and constancy arguments give `H₀¹(B) ⊆ H₀¹(Ω)` and `H₀¹(A) ⊆ H₀¹(Ω)` for the ball

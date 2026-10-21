@@ -7,7 +7,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-CHALLENGES = {"Challenge.lean", "ChallengeConditional.lean"}
+CHALLENGES = {"Challenge.lean": 2, "ChallengeConditional.lean": 1}
 FORBIDDEN = re.compile(r"\b(sorry|admit|axiom|native_decide|implemented_by|unsafe|extern)\b")
 RAW_STRING = re.compile(r'r(#+)?"')
 
@@ -97,8 +97,10 @@ def main() -> int:
         matches = list(FORBIDDEN.finditer(code))
         if relative in CHALLENGES:
             holes = [m for m in matches if m.group() == "sorry"]
-            if len(holes) != 1:
-                failures.append(f"{relative}: expected one deliberate Challenge sorry")
+            if len(holes) != CHALLENGES[relative]:
+                failures.append(
+                    f"{relative}: expected {CHALLENGES[relative]} deliberate Challenge sorry terms"
+                )
             matches = [m for m in matches if m.group() != "sorry"]
             if len(text.splitlines()) > 1_000 or len(text.encode("utf-8")) > 100 * 1024:
                 failures.append(f"{relative}: exceeds Challenge size limit")

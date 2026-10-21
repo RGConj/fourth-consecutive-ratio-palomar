@@ -7,11 +7,12 @@ public import Mathlib
 
 We fix the ambient Euclidean space `ℝ^N = EuclideanSpace ℝ (Fin N)`.
 
-**Model of the Sobolev space.**  Mathlib has no Sobolev spaces, so we model `H¹(ℝ^N)` through
+**Model of the Sobolev space.**  We model `H¹(ℝ^N)` through
 pairs `(v, g)` with `v ∈ L²(ℝ^N)` and `g ∈ L²(ℝ^N; ℝ^N)`, where `g` plays the role of the weak
-gradient of `v`.  For an open set `D`, the space `H_D = H₀¹(D)` is defined as the closure (in
-`L² × L²`, i.e. in the `H¹` norm) of the graph `{(φ, ∇φ) : φ ∈ C_c^∞(D)}`.  This is the usual
-definition of `H₀¹(D)` as the `H¹`-closure of `C_c^∞(D)`; every element is automatically
+gradient of `v`.  For an open set `D`, the space `H_D = H₀¹(D)` is defined as the closure of
+the graph `{(φ, ∇φ) : φ ∈ C_c^∞(D)}` in `L² × L²`.  The product uses the maximum of the two
+`L²` norms, which is equivalent to the usual `H¹` norm and gives the same closure.  This is
+the usual definition of `H₀¹(D)` as the `H¹`-closure of `C_c^∞(D)`; every element is automatically
 identified with its zero extension to `ℝ^N`, exactly as in the paper.  In particular, for
 `D₁ ⊆ D₂` we literally have `H D₁ ≤ H D₂`, and `H D₁ = H D₂` is the paper's equality of form
 domains "as subspaces of `H¹(ℝ^N)`".
@@ -92,8 +93,8 @@ def CN (N : ℕ) : ℝ :=
   besselZero ((N : ℝ) / 2) 1 ^ 2 / besselZero ((N : ℝ) / 2 - 1) 1 ^ 2
 
 /-- The radial Bessel profile `Φ(x) = |x|^{-ν} J_ν(√a |x|)`, `ν = N/2 - 1` (normalised with
-`c = 1`; its value at `x = 0` is irrelevant up to the analytic extension, see the external
-ball lemma). -/
+`c = 1`; the analytic extension through `x = 0` is constructed in `BesselEntire.lean` and
+used for the ball eigenfunction in `BallSpectral.lean`). -/
 def besselProfile (N : ℕ) (a : ℝ) (x : RN N) : ℝ :=
   ‖x‖ ^ (-((N : ℝ) / 2 - 1)) * besselJ ((N : ℝ) / 2 - 1) (Real.sqrt a * ‖x‖)
 
@@ -176,11 +177,12 @@ def HasSmoothBoundary (Ω : Set (RN N)) : Prop :=
   ∃ ρ : RN N → ℝ, ContDiff ℝ ((⊤ : ℕ∞) : WithTop ℕ∞) ρ ∧ Ω = {x | ρ x < 0} ∧
     ∀ x, ρ x = 0 → fderiv ℝ ρ x ≠ 0
 
-/-! ### The Payne–Pólya–Weinberger statements (External theorem 2.3, used as hypotheses) -/
+/-! ### Modular Payne–Pólya–Weinberger statements (External theorem 2.3 of the paper) -/
 
 /-- The statement of the PPW inequality (Ashbaugh–Benguria) in dimension `N`:
 `λ₂(D) ≤ C_N λ₁(D)` for every bounded domain `D`. Modular reductions take this
-statement and `PPWEqualityCase` as hypotheses; `PPWGap` proves both. -/
+statement and `PPWEqualityCase` as hypotheses; their proved instances are exposed in
+`PPWGap.lean`, using the Bessel and Chiti results assembled in `PPWProof.lean`. -/
 def PPWInequality (N : ℕ) : Prop :=
   ∀ ⦃D : Set (RN N)⦄, IsDomain D → eigenvalue D 2 ≤ CN N * eigenvalue D 1
 
