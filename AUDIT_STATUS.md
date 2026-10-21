@@ -78,12 +78,19 @@ problem. This is AI source review, not human peer review.
 - Main axiom gate: passed for all 52 declarations, including the unconditional
   main theorem, exact quotient, repaired Bessel/Chiti inputs and unconditional
   corollaries. Their transitive axiom closures contain only the standard three.
-- Fresh release build and official sandboxed Comparator replay: pending final
-  execution in the release workflows. These are not yet claimed as passed.
+- Fresh Linux release build: passed on the exact source commit
+  `ef28a23edebcb472265f00dfcb527a57f08f7e92`, with no project artifacts restored.
+  All nine strict axiom scripts passed (227 declaration checks).
+  [Build and axiom run](https://github.com/RGConj/fourth-consecutive-ratio-palomar/actions/runs/39571270139).
+- Official sandboxed Comparator, Lean kernel replay, and both bundled independent
+  kernels (NanoDa and con-ron): passed on that same source commit.
+  [Comparator run](https://github.com/RGConj/fourth-consecutive-ratio-palomar/actions/runs/39571270186).
 
-The two GitHub workflows reproduce the build/axiom/metadata checks and Linux
-sandboxed official Comparator with bundled NanoDa and con-ron. A local Windows
-run without `bubblewrap` is not described as a sandboxed Palomar check.
+The two GitHub workflows reproduce the build/axiom/metadata checks and the
+Linux sandboxed official Comparator with bundled NanoDa and con-ron. The
+independent replay uses `bubblewrap` and the pinned toolchain binaries.
+The execution evidence above refers to the source commit; later documentation
+updates do not alter its mathematical source.
 
 ## Release boundary
 

@@ -47,6 +47,8 @@ jobs:
           build: false
           use-github-cache: false
           use-mathlib-cache: false
+          nanoda: false
+          nanoda-allow-sorry: false
       - name: Install the Comparator sandbox
         run: |
           sudo apt-get update -qq

@@ -47,6 +47,8 @@ jobs:
           build: false
           use-github-cache: false
           use-mathlib-cache: true
+          nanoda: false
+          nanoda-allow-sorry: false
       - name: Build the full development
         run: lake build
       - name: Validate submission metadata and dependency pins
