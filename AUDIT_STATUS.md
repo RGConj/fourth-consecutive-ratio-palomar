@@ -131,6 +131,14 @@ passing compilation and axiom gates does not mean the source is warning-free.
 
 ## Release boundary
 
+The Palomar preflight checked the official submission policy and the metadata
+contract at `PalomarRegistry/PalomarSubmission` revision
+`d4e41c1d5b0d114c4859e6e5831dc6d3ad1d0d44`. Source types use the policy's
+documented `paper` vocabulary, with the unpublished manuscript's availability
+and unestablished novelty disclosed explicitly. The official metadata loader
+accepts the project as a source-based substantive development. This preflight
+does not constitute a Palomar submission or its own mechanical/editorial review.
+
 Only Lean source, declared dependency pins, verification scripts, documentation,
 metadata and license material are included. The manuscript TeX, literature PDFs,
 private process logs, build artifacts and development cache junction are excluded.

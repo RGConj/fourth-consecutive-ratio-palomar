@@ -18,6 +18,10 @@ not extend to arbitrary bounded open sets (four disjoint congruent balls attain
 equality). This is the $m=4$ case of the consecutive-ratio conjecture.
 Here $j_{\nu,1}$ denotes the first positive zero of the Bessel function $J_\nu$.
 
+The intended audience is researchers in spectral geometry and elliptic
+eigenvalue inequalities. The result bounds a consecutive pair beyond the
+first two Dirichlet eigenvalues, including domains with irregular boundaries.
+
 ## Formal statement and definitions
 
 The entry point is `FourthRatio.fourth_consecutive_ratio` in [Solution.lean](Solution.lean):
@@ -116,12 +120,20 @@ The Bessel argument follows Ashbaugh and Benguria,
 The mass comparison is based on Chiti's rearrangement method
 ([background](https://doi.org/10.1007/BF00948319)). Reused geometric and coarea
 formal proofs are attributed in [THIRD_PARTY.md](THIRD_PARTY.md) and their source headers.
-Lean and Mathlib supply the underlying library, rather than the new fourth-ratio theorem.
+Lean and Mathlib supply the underlying library for the fourth-ratio proof.
+The source manuscript is unpublished and is not included or publicly archived
+in this repository, so its text cannot be independently checked from this
+snapshot. Novelty and priority relative to other work have not been established
+by this audit; no such claim rests on the private manuscript.
 
 This repository contains formal source, verification scripts and metadata;
 the original manuscript TeX and literature PDFs are excluded. It is prepared
 for a later [Palomar submission](https://palomar-registry.org/how-to-submit),
 which requires a public repository and a fixed commit. It remains private until
 the authors choose to publish it; no registry submission has been made.
+For the unconditional main theorem, select the repository-root project,
+`comparator.json` and `formalization.yaml`, and supply the full pushed commit
+SHA. The separate `comparator-conditional.json` records a modular reduction
+with PPW hypotheses and is not the configuration for the unconditional claim.
 
 Source license: [Apache-2.0](LICENSE).

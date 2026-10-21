@@ -19,6 +19,7 @@ SCHEMA_URL = (
 )
 SHA = re.compile(r"[0-9a-f]{40}\Z")
 ALLOWED_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
+PALOMAR_SOURCE_TYPES = {"paper", "book", "web discussion", "folklore", "original-proof", "other"}
 
 
 def require(condition: bool, message: str) -> None:
@@ -41,6 +42,11 @@ def main() -> None:
     require(metadata["status"]["sorry_count"] == 0, "production proofs must be complete")
     require(metadata["status"]["sorry_in_definitions"] == 0, "definitions must be complete")
     require(set(metadata["status"]["axioms"]) == ALLOWED_AXIOMS, "unexpected metadata axioms")
+    # The upstream schema allows free-form source types; Palomar's submission
+    # standard specifies a smaller vocabulary (CONTRIBUTING.md, section 3.2).
+    for source in metadata["sources"]:
+        require("type" not in source or source["type"] in PALOMAR_SOURCE_TYPES,
+                "source type is outside Palomar's documented vocabulary")
 
     config = tomllib.loads((ROOT / "lakefile.toml").read_text(encoding="utf-8"))
     manifest = json.loads((ROOT / "lake-manifest.json").read_text(encoding="utf-8"))

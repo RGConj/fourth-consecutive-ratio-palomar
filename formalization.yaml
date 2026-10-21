@@ -16,24 +16,40 @@ classification:
 sources:
   - title: "A sharp bound for the fourth consecutive Dirichlet eigenvalue ratio"
     authors: ["Jiachen Shi", "Quanyu Tang"]
-    type: "unpublished manuscript"
+    type: "paper"
     location: "Author-supplied manuscript, main theorem (label thm:main)."
     relationship: "formalizes"
     note: >-
       The mathematical authors developed the original informal proof with
-      ChatGPT assistance. Manuscript TeX is excluded from the release source.
+      ChatGPT assistance. This is an unpublished author-supplied manuscript;
+      its TeX is excluded and the source document cannot be independently checked
+      from this repository. Novelty and priority have not been established by
+      the formalization audit.
   - title: "A Second Proof of the Payne–Pólya–Weinberger Conjecture"
     authors: ["Mark S. Ashbaugh", "Rafael D. Benguria"]
-    type: "article"
+    type: "paper"
     id: "https://doi.org/10.1007/BF02099533"
     relationship: "background"
     note: "Background for the Bessel monotonicity arguments."
   - title: "A reverse Hölder inequality for the eigenfunctions of linear second order elliptic operators"
     authors: ["Giuseppe Chiti"]
-    type: "article"
+    type: "paper"
     id: "https://doi.org/10.1007/BF00948319"
     relationship: "background"
     note: "Background for the rearrangement and mass-comparison argument."
+related_formalizations:
+  - id: "https://github.com/Vilin97/lean-pool/tree/9c296f447f48f3242df5e65e0b6120ddffcd79a7/LeanPool/Isoperimetric"
+    relationship: "builds-on"
+    note: >-
+      Reuses Jonathan Ho's Prékopa–Leindler, Brunn–Minkowski and isoperimetric
+      formal proofs from this fixed snapshot. Local files preserve the author
+      and Apache-2.0 notices; adaptations are described in THIRD_PARTY.md.
+  - id: "https://github.com/Polarnova/ProbabilityApproximation/blob/a2fc5bda874d9b69186c0ba165bf79f3b9897662/ProbabilityApproximation/ConvexGeometry/ScalarCoarea.lean"
+    relationship: "builds-on"
+    note: >-
+      Adapts Asher Yan's scalar coarea development, credited there with ChatGPT
+      5.6 assistance. The original Apache-2.0 notice and attribution are retained;
+      local changes are described in THIRD_PARTY.md.
 status:
   scope: >-
     The main Challenge/Solution pair proves the unconditional strict fourth-ratio
