@@ -1,7 +1,48 @@
 # Source and verification audit
 
-This file records the scope and limits of the formalization audit. It is not
-an independent human review or a Palomar acceptance certificate.
+This file records the scope and limits of the formalization audit and links to
+the public Palomar registration and verification evidence. No independent human
+peer review is claimed.
+
+## Palomar registration on 2026-10-22
+
+- Registered result: [PALOMAR-2026-10-22-000012, version 1](https://palomar-registry.org/entry?id=PALOMAR-2026-10-22-000012&version=1).
+- Registered source: [`55ff1f42612a01b2fbe4a1eafc618cdcf83c3b75`](https://github.com/RGConj/fourth-consecutive-ratio-palomar/tree/55ff1f42612a01b2fbe4a1eafc618cdcf83c3b75).
+- Configuration: repository-root `comparator.json`, checking both
+  `FourthRatio.fourth_consecutive_ratio` and
+  `FourthRatio.fourth_consecutive_ratio_div`.
+- Mechanical verification: passed on 2026-10-21, including the official Comparator
+  with NanoDa and con-ron; permitted axioms are `propext`, `Quot.sound` and
+  `Classical.choice`.
+  [Verification run](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/39601289547).
+- Repository CI at the registered commit also passed:
+  [build and axiom audit](https://github.com/RGConj/fourth-consecutive-ratio-palomar/actions/runs/39592206006),
+  [Comparator and independent kernels](https://github.com/RGConj/fourth-consecutive-ratio-palomar/actions/runs/39592206004).
+- Automated editorial review: completed on 2026-10-21 by `codex:gpt-6-sol`, with
+  outcome `neutral`, no blocking problem, and one non-blocking proof-account warning.
+- The [machine-readable registry record](https://data.palomar-registry.org/entries/PALOMAR-2026-10-22-000012-v1.json)
+  identifies the verification evidence, review and source-preservation archive.
+
+The review warning concerns the informal explanation of strictness: the
+registered README listed the analytic inputs through PPW without explaining
+the final topological contradiction. That argument was already implemented
+in `MainLineField.lean`, `DegLineField.lean` and `MainTheorem.lean` at the
+registered commit. Assuming `C_N * lambda_4 <= lambda_5`, the spectral and nodal
+analysis constructs a continuous line field near a separating level set in
+the unit sphere of the first four eigenfunctions. The lines are orthogonal
+to both the sphere point and the ground-state coordinate vector.
+`Degree.degree_no_line_field` rules out such a field on a thin compact slab
+by a homotopy-degree obstruction on the two-sphere.
+`Setup.prop_degree_contradiction` combines the construction and obstruction;
+`fourth_ratio_of_ppw` concludes the strict inequality, with proved PPW inputs
+supplied by `Unconditional.lean`.
+
+The current README expands this proof account in response to the warning.
+These documentation and metadata updates do not change the Lean definitions,
+proofs, dependency pins or Comparator configuration. They do not amend the
+registered version 1 snapshot or its published review. Registration records
+mechanical verification and automated editorial review; it does not constitute
+independent human peer review or establish novelty or priority.
 
 ## Statement fidelity
 
@@ -124,8 +165,8 @@ mathematical definitions and proof bodies are unchanged. Challenge contains
 two deliberate task placeholders; ChallengeConditional contains one. Neither
 is imported by a solution.
 
-Historical CI passes above apply only to their named revisions. For these
-follow-up changes, use both workflow results attached to the final revision.
+Historical CI passes above apply only to their named revisions. Both workflows
+also passed on the registered revision, as linked in the registration section.
 Build logs may contain non-fatal style and unused-tactic linter messages;
 passing compilation and axiom gates does not mean the source is warning-free.
 
@@ -145,8 +186,6 @@ private process logs, build artifacts and development cache junction are exclude
 The release build uses its own dependency directories and begins with no project
 artifacts. Dependency caches may be reused only at the declared exact revisions.
 
-The repository remains private at the authors' request. Future Palomar intake
-requires publication and a fixed full commit, as specified by the
-[submission guide](https://palomar-registry.org/how-to-submit) and
-[contribution policy](https://github.com/PalomarRegistry/PalomarPolicy/blob/main/CONTRIBUTING.md).
-No registry submission is made by this preparation.
+The repository is now public. The authors registered the unconditional main
+result with Palomar on 2026-10-22; the exact version, source commit and evidence
+are linked above. Later repository updates do not change that registered snapshot.

@@ -55,7 +55,9 @@ status:
     The main Challenge/Solution pair proves the unconditional strict fourth-ratio
     inequality. RatioStatement supplies the exact quotient form using the proved
     positivity of lambda_4. Both Bessel monotonicities and Chiti mass concentration
-    are proved for the actual mathematical objects. Conditional reductions remain
+    are proved for the actual mathematical objects. Strictness follows by
+    constructing a line field under the negation of the strict inequality and
+    deriving a topological degree contradiction. Conditional reductions remain
     separate library results. Deliberate Challenge placeholders are excluded from
     the production proof count.
   sorry_count: 0
@@ -91,7 +93,14 @@ review:
     Codex audited domain, Sobolev graph-closure, min-max, Bessel-series and zero
     definitions and the complete main proof chain. A separate AI reviewer inspected
     source fidelity, hypothesis consumption and the new Bessel/Chiti proof chain.
-    No independent human peer review or Palomar approval is claimed.
+    Palomar registered version 1 as PALOMAR-2026-10-22-000012 on 2026-10-22 at
+    commit 55ff1f42612a01b2fbe4a1eafc618cdcf83c3b75:
+    https://palomar-registry.org/entry?id=PALOMAR-2026-10-22-000012&version=1.
+    Mechanical verification passed; the automated editorial review identified no
+    blocking problem and recorded a non-blocking warning about the missing
+    topological strictness step in the informal proof account. The current README
+    explains that already-formalized step; the version 1 record and review remain
+    unchanged. Registration and automated review are not independent human peer review.
 alignment:
   namespace: "FourthRatio"
   statements:
